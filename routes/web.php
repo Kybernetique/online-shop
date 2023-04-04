@@ -2,7 +2,8 @@
 
 use \App\Http\Controllers\CategoryController;
 use \App\Http\Controllers\ProductController;
-use \App\Http\Controllers\IndexController;
+use \App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [IndexController::class, 'index']);
+Auth::routes();
 
-Route::get('/products/{product}', [ProductController::class, 'product']);
+Route::get('/home', [HomeController::class, 'index']);
+
 Route::get('/products', [ProductController::class, 'products']);
+Route::get('/products/{product}', [ProductController::class, 'product']);
 
 Route::get('/categories', [CategoryController::class, 'categories']);
-Route::get('/categories/{category}', [CategoryController::class, 'category'])->name('category');
-
-
+Route::get('/categories/{category}', [CategoryController::class, 'category']);
