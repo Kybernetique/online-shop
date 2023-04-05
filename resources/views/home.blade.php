@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-@include('products')
+    @include('products.products')
 @endsection

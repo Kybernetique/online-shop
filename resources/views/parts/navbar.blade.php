@@ -37,11 +37,9 @@
                                      height="32"> </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 {{-- Personal Home Page --}}
-                                <a class="dropdown-item" href="/user">Моя
-                                    страница</a>
+                                <a class="dropdown-item" href="{{ route('user') }}">Моя страница</a>
                                 {{-- Orders --}}
-                                <a class="dropdown-item" href="/user/orders">Мои
-                                    заказы</a>
+                                <a class="dropdown-item" href="/user/orders">Мои заказы</a>
                                 <hr class="dropdown-divider">
                                 {{-- Logout --}}
                                 <a class="dropdown-item" href="{{ route('logout') }}"
