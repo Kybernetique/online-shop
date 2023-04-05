@@ -12,7 +12,7 @@
                     <div class="col">
                         <div class="card mb-4 rounded-3 shadow-sm">
                             <div class="card-header py-3 text-bg-dark">
-                                <a class="w-100 btn btn-lg btn-dark" href="{{'product', $product->id}}">
+                                <a class="w-100 btn btn-lg btn-dark" href="{{route('product', $product->id)}}">
                                     <h4 class="my-0 fw-normal">{{$product['name']}}</h4>
                                 </a>
                             </div>
@@ -38,4 +38,3 @@
 @include('parts.footer')
 </body>
 </html>
-

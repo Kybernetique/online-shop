@@ -18,10 +18,10 @@
                                  height="200">
                             <ul class="list-unstyled mt-5 mb-4"></ul>
                             @if($category['name'] != 'Все товары')
-                                <a href="{{'category', $category->id}}"
+                                <a href="{{route('category', $category->id)}}"
                                    class="w-100 btn btn-lg btn-warning">Перейти</a>
                             @else
-                                <a href="{{'products'}}" class="w-100 btn btn-lg btn-warning">Перейти</a>
+                                <a href="{{route('products')}}" class="w-100 btn btn-lg btn-warning">Перейти</a>
                             @endif
 
                         </div>
