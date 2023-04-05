@@ -1,9 +1,6 @@
-<!doctype html>
-<html lang="en">
-@include('parts.head')
-<body>
-@include('parts.navbar')
+@extends('layouts.app')
 
+@section('content')
 <div class="container py-3">
     <main>
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
@@ -31,8 +28,4 @@
         </div>
     </main>
 </div>
-
-@include('parts.footer')
-</body>
-</html>
-
+@endsection

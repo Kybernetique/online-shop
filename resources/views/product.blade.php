@@ -1,9 +1,6 @@
-<!doctype html>
-<html lang="en">
-@include('parts.head')
-<body>
-@include('parts.navbar')
+@extends('layouts.app')
 
+@section('content')
 <div class="px-4 pt-5 my-5 text-center border-bottom">
     <h1 class="display-4 fw-bold">{{$product['name']}}</h1>
 
@@ -21,8 +18,4 @@
         </div>
     </div>
 </div>
-
-@include('parts.footer')
-</body>
-</html>
-
+@endsection
