@@ -19,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/products', [ProductController::class, 'products']);
-Route::get('/products/{product}', [ProductController::class, 'product']);
+Route::get('/products', [ProductController::class, 'products'])->name('products');
+Route::get('/products/{product}', [ProductController::class, 'product'])->name('product');
 
-Route::get('/categories', [CategoryController::class, 'categories']);
-Route::get('/categories/{category}', [CategoryController::class, 'category']);
+Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
+Route::get('/categories/{category}', [CategoryController::class, 'category'])->name('category');
