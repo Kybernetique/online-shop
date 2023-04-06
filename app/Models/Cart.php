@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
-
+    protected $table = 'carts';
     protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $fillable = ['total_price', 'user_id'];
 
@@ -17,7 +17,7 @@ class Cart extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function item() {
+    public function items() {
         return $this->hasMany(Item::class);
     }
 }

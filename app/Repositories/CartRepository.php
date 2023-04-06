@@ -16,6 +16,11 @@ class CartRepository
         return Cart::create($data);
     }
 
+    public function getCartByUser($user): ?Cart
+    {
+        return $user->cart;
+    }
+
     public function save(Cart $cart): Cart
     {
         $cart->save();
