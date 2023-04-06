@@ -30,22 +30,32 @@ class  CartController extends Controller
         return view('carts.cart', compact('cart'));
     }
 
-    public function addToCart(Product $product, Request $request)
+    public function addItem(Product $product, Request $request)
     {
         $user = $request->user();
+
         $cart = $this->cartService->getCartByUser($user);
+        if ($cart === null) {
+            $this->cartService->createCart($user);
+        }
         $quantity = $request->input('quantity');
+        $item = new Item([
+            'cart_id' => $cart->id,
+            'product_id' => $product->id,
+            'quantity' => $quantity,
+            'price' => $product->price * $quantity
+        ]);
 
-        $this->cartService->addProductToCart($cart, $product, $quantity);
+        $this->cartService->createOrUpdate($cart, $item);
 
-        return redirect('/categories');
+
+        $categoryId = $product->category_id;
+        return redirect("/categories/$categoryId");
     }
 
-    public function updateItem(Item $item, Request $request) {
-        $user = $request->user();
-        $cart = $this->cartService->getCartByUser($user);
+    public function updateItem(Item $item, Request $request)
+    {
         $quantity = $request->input('quantity');
-
         $this->cartService->updateItem($item, $quantity);
 
         return redirect('/cart');

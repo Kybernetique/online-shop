@@ -13,8 +13,13 @@ class Product extends Model
     protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $fillable = ['name', 'description', 'price', 'image']; // список разрешенных для изменения атрибутов (полей)
 
-    public function items()
+    public function category()
     {
-        return $this->hasMany(Item::class);
+        return $this->belongsTo(Category::class);
+    }
+
+    public function item()
+    {
+        return $this->hasOne(Item::class);
     }
 }

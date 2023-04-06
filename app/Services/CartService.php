@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Controllers\ProductController;
 use App\Models\Cart;
 use App\Models\Item;
 use App\Models\Product;
@@ -34,28 +35,37 @@ class CartService
         return $this->cartRepository->getCartByUser($user);
     }
 
-    public function addProductToCart(Cart $cart, Product $product, int $quantity)
+    public function createOrUpdate(Cart $cart, Item $newItem)
     {
+        $items = $cart->items()->get();
+        foreach ($items as $cartItem) {
+            // if item already exists in cart
+            if ($cartItem->product_id === $newItem->product_id) {
+                $this->itemRepository->update($cartItem, [
+                    'quantity' => $cartItem->quantity + $newItem->quantity,
+                    'price' => $cartItem->price + $newItem->price,
+                    'product_id' => $newItem->product->id,
+                    'cart_id' => $newItem->cart->id
+                ]);
+                return ;
+            }
+        }
         $this->itemRepository->create([
-            'quantity' => $quantity,
-            'price' => $product->price * $quantity,
-            'product_id' => $product->id,
-            'cart_id' => $cart->id
+            'quantity' => $newItem->quantity,
+            'price' => $newItem->product->price * $newItem->quantity,
+            'product_id' => $newItem->product->id,
+            'cart_id' => $newItem->cart->id
         ]);
     }
 
-    public function updateItem(Item $item, int $quantity) {
-        $item->quantity = $quantity;
-        $item->price = $item->product->price * $quantity;
-        $item->save();
-    }
 
-//    private function transformProductIntoItem(Product $product, int $quantity, float $price): Item
-//    {
-//        $item = new Item();
-//        $item->product = $product;
-//        $item->quantity = $quantity;
-//        $item->price = $price;
-//        return $item;
-//    }
+    public function updateItem(Item $item, int $quantity)
+    {
+        $this->itemRepository->update($item, [
+            'quantity' => $quantity,
+            'price' => $item->price,
+            'product_id' => $item->product->id,
+            'cart_id' => $item->cart->id
+        ]);
+    }
 }

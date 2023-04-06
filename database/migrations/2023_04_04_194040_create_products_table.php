@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('image');
             $table->timestamps();
             $table->unsignedBigInteger("category_id");
-            $table->unsignedBigInteger('cart_id')->nullable();
 
             $table->foreign('category_id', 'product_category_fk')
                 ->references('id')

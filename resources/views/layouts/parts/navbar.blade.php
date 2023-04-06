@@ -17,6 +17,7 @@
                             Главная
                         </a>
                     </li>
+                    @auth
                     {{-- Cart --}}
                     <li>
                         <a href="{{route('categories')}}" class="nav-link text-white">
@@ -25,6 +26,7 @@
                             Каталог
                         </a>
                     </li>
+                    @endauth
                     {{-- Browse --}}
                     <li>
                         <a href="{{route('cart')}}" class="nav-link text-white">

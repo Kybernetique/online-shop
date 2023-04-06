@@ -26,7 +26,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/user', [UserController::class, 'user'])->name('user');
 
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
-Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::post('/cart/add/{product}', [CartController::class, 'addItem'])->name('add-to-cart');
 Route::post('/cart/update/{item}', [CartController::class, 'updateItem'])->name('update-item');
 
 Route::get('/products', [ProductController::class, 'products'])->name('products');
