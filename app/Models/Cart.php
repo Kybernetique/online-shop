@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Cart extends Model
 {
     use HasFactory;
 
-    protected $table = 'products';
     protected $guarded = ['id', 'created_at', 'updated_at'];
-    protected $fillable = ['name', 'description', 'price']; // список разрешенных для изменения атрибутов (полей)
+    protected $fillable = ['total_price', 'user_id'];
 
-    public function item()
+    public function user()
     {
+        return $this->belongsTo(User::class);
+    }
+
+    public function item() {
         return $this->hasMany(Item::class);
     }
 }

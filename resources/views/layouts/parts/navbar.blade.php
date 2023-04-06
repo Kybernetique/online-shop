@@ -17,12 +17,20 @@
                             Главная
                         </a>
                     </li>
-                    {{-- Browse --}}
+                    {{-- Cart --}}
                     <li>
                         <a href="{{route('categories')}}" class="nav-link text-white">
                             <img class="bi d-block mx-auto mb-1" width="24" height="24"
                                  src="/img/header/grid.png">
                             Каталог
+                        </a>
+                    </li>
+                    {{-- Browse --}}
+                    <li>
+                        <a href="{{route('cart')}}" class="nav-link text-white">
+                            <img class="bi d-block mx-auto mb-1" width="24" height="24"
+                                 src="/img/header/cart.png">
+                            Корзина
                         </a>
                     </li>
                     @auth
