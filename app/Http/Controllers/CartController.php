@@ -40,4 +40,14 @@ class  CartController extends Controller
 
         return redirect('/categories');
     }
+
+    public function updateItem(Item $item, Request $request) {
+        $user = $request->user();
+        $cart = $this->cartService->getCartByUser($user);
+        $quantity = $request->input('quantity');
+
+        $this->cartService->updateItem($item, $quantity);
+
+        return redirect('/cart');
+    }
 }

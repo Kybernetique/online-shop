@@ -10,10 +10,10 @@
                     <div class="table-main table-responsive">
                         <table class="table">
                             {{-- is empty --}}
-{{--                            @if(empty($cart))--}}
-{{--                                <p class="alert alert-warning">В вашей корзине нет товаров.</p>--}}
+                            {{--                            @if(empty($cart))--}}
+                            {{--                                <p class="alert alert-warning">В вашей корзине нет товаров.</p>--}}
 
-{{--                                --}}{{-- is not empty --}}
+                            {{--                                --}}{{-- is not empty --}}
                             @if(!empty($cart))
                                 <div>
                                     <thead>
@@ -39,8 +39,9 @@
                                             <td class="price-pr">
                                                 <p>{{$item->product->price}}</p>
                                             </td>
-                                            <form action="{{route()}}" method="POST">
-                                                <input type="hidden" name="id" value="{{$item->product->id}}">
+                                            <form method="POST" action="{{route('update-item', $item->id)}}">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$item->id}}">
                                                 <td class="quantity-box"><input type="number" size="4"
                                                                                 value="{{$item->quantity}}"
                                                                                 name="quantity" min="0" step="1"
@@ -50,13 +51,10 @@
                                                 </td>
 
                                                 <td class="update-pr">
-
-                                                    <button type="submit" name="action" value="update" title="Update"
-                                                            class="btn btn-warning">Обновить
+                                                    <button type="submit" class="btn btn-warning">Обновить
                                                     </button>
 
-                                                    <button type="submit" name="action" value="delete" title="Delete"
-                                                            class="btn btn-danger">Удалить
+                                                    <button type="submit" class="btn btn-danger">Удалить
                                                     </button>
                                                 </td>
                                             </form>

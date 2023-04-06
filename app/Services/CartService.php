@@ -44,6 +44,12 @@ class CartService
         ]);
     }
 
+    public function updateItem(Item $item, int $quantity) {
+        $item->quantity = $quantity;
+        $item->price = $item->product->price * $quantity;
+        $item->save();
+    }
+
 //    private function transformProductIntoItem(Product $product, int $quantity, float $price): Item
 //    {
 //        $item = new Item();
