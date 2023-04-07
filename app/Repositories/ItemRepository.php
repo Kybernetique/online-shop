@@ -16,12 +16,6 @@ class ItemRepository
         return Item::create($data);
     }
 
-    public function save(Item $item): Item
-    {
-        $item->save();
-        return $item;
-    }
-
     public function update(Item $item, array $data): bool
     {
         return $item->update($data);

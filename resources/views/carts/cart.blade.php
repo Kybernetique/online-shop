@@ -51,10 +51,12 @@
                                                 </td>
 
                                                 <td class="update-pr">
-                                                    <button type="submit" class="btn btn-warning">Обновить
+                                                    <button type="submit" name="action" value="update" title="Update"
+                                                            class="btn btn-warning">Обновить
                                                     </button>
 
-                                                    <button type="submit" class="btn btn-danger">Удалить
+                                                    <button type="submit" name="action" value="delete" title="Delete"
+                                                            class="btn btn-danger">Удалить
                                                     </button>
                                                 </td>
                                             </form>

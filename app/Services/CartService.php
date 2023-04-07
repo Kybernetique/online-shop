@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Repositories\CartRepository;
 use App\Repositories\ItemRepository;
 use App\Repositories\ProductRepository;
+use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Ignition\Tests\TestClasses\Models\Car;
 
@@ -30,12 +31,12 @@ class CartService
         ]);
     }
 
-    public function getCartByUser($user)
+    public function getCartByUser($user): ?Cart
     {
         return $this->cartRepository->getCartByUser($user);
     }
 
-    public function createOrUpdate(Cart $cart, Item $newItem)
+    public function createOrUpdate(Cart $cart, Item $newItem): void
     {
         $items = $cart->items()->get();
         foreach ($items as $cartItem) {
@@ -58,8 +59,12 @@ class CartService
         ]);
     }
 
+    public function deleteItem(Item $item) {
+        $this->itemRepository->delete($item);
+    }
 
-    public function updateItem(Item $item, int $quantity)
+
+    public function updateItemQuantity(Item $item, int $quantity): void
     {
         $this->itemRepository->update($item, [
             'quantity' => $quantity,

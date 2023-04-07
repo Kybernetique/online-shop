@@ -48,15 +48,18 @@ class  CartController extends Controller
 
         $this->cartService->createOrUpdate($cart, $item);
 
-
         $categoryId = $product->category_id;
         return redirect("/categories/$categoryId");
     }
 
     public function updateItem(Item $item, Request $request)
     {
+        $action = $request->input('action');
         $quantity = $request->input('quantity');
-        $this->cartService->updateItem($item, $quantity);
+
+        $action == 'update'
+            ? $this->cartService->updateItemQuantity($item, $quantity)
+            : $this->cartService->deleteItem($item);
 
         return redirect('/cart');
     }

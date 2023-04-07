@@ -16,16 +16,6 @@ class CartRepository
         return Cart::create($data);
     }
 
-    public function getCartByUser($user): ?Cart
-    {
-        return $user->cart;
-    }
-
-    public function save(Cart $cart): Cart
-    {
-        $cart->save();
-        return $cart;
-    }
     public function update(Cart $cart, array $data): bool
     {
         return $cart->update($data);
@@ -34,5 +24,10 @@ class CartRepository
     public function delete(Cart $cart): bool
     {
         return $cart->delete();
+    }
+
+    public function getCartByUser($user): ?Cart
+    {
+        return $user->cart;
     }
 }
