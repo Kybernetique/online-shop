@@ -36,7 +36,18 @@ class CartService
         return $this->cartRepository->getCartByUser($user);
     }
 
-    public function createOrUpdate(Cart $cart, Item $newItem): void
+    public function getTotalPrice(Cart $cart): float
+    {
+        $items = $cart->items()->get();
+
+        $price = 0;
+        foreach ($items as $item) {
+            $price += $item->price;
+        }
+        return $price;
+    }
+
+    public function createOrUpdateItem(Cart $cart, Item $newItem): void
     {
         $items = $cart->items()->get();
         foreach ($items as $cartItem) {
@@ -48,7 +59,7 @@ class CartService
                     'product_id' => $newItem->product->id,
                     'cart_id' => $newItem->cart->id
                 ]);
-                return ;
+                return;
             }
         }
         $this->itemRepository->create([
@@ -59,7 +70,8 @@ class CartService
         ]);
     }
 
-    public function deleteItem(Item $item) {
+    public function deleteItem(Item $item)
+    {
         $this->itemRepository->delete($item);
     }
 
@@ -68,7 +80,7 @@ class CartService
     {
         $this->itemRepository->update($item, [
             'quantity' => $quantity,
-            'price' => $item->price,
+            'price' => $item->product->price * $quantity,
             'product_id' => $item->product->id,
             'cart_id' => $item->cart->id
         ]);

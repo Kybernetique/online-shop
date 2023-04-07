@@ -3,12 +3,17 @@
 namespace App\Repositories;
 
 use App\Models\Item;
-
+use Illuminate\Database\Eloquent\Collection;
 class ItemRepository
 {
     public function find(int $id): ?Item
     {
         return Item::find($id);
+    }
+
+    public function findAll(): Collection
+    {
+        return Item::all();
     }
 
     public function create(array $data): Item

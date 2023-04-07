@@ -26,15 +26,15 @@ class  CartController extends Controller
         if ($cart === null) {
             $this->cartService->createCart($user);
         }
-
+        $cart->total_price = $this->cartService->getTotalPrice($cart);
         return view('carts.cart', compact('cart'));
     }
 
     public function addItem(Product $product, Request $request)
     {
         $user = $request->user();
-
         $cart = $this->cartService->getCartByUser($user);
+
         if ($cart === null) {
             $this->cartService->createCart($user);
         }
@@ -46,7 +46,7 @@ class  CartController extends Controller
             'price' => $product->price * $quantity
         ]);
 
-        $this->cartService->createOrUpdate($cart, $item);
+        $this->cartService->createOrUpdateItem($cart, $item);
 
         $categoryId = $product->category_id;
         return redirect("/categories/$categoryId");
@@ -54,6 +54,9 @@ class  CartController extends Controller
 
     public function updateItem(Item $item, Request $request)
     {
+        $user = $request->user();
+        $cart = $this->cartService->getCartByUser($user);
+
         $action = $request->input('action');
         $quantity = $request->input('quantity');
 
@@ -61,6 +64,7 @@ class  CartController extends Controller
             ? $this->cartService->updateItemQuantity($item, $quantity)
             : $this->cartService->deleteItem($item);
 
+        $cart->total_price = $this->cartService->getTotalPrice($cart);
         return redirect('/cart');
     }
 }
