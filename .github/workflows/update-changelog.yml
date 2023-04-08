@@ -2,9 +2,9 @@ name: update changelog
 
 on:
   release:
-    types: [released]
+    types: [ released ]
 
-permissions: {}
+permissions: { }
 
 jobs:
   update:

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Cart extends Model
 {
     use HasFactory;
+
     protected $table = 'carts';
     protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $fillable = ['total_price', 'user_id'];

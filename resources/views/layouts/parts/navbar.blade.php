@@ -18,14 +18,14 @@
                         </a>
                     </li>
                     @auth
-                    {{-- Cart --}}
-                    <li>
-                        <a href="{{route('categories')}}" class="nav-link text-white">
-                            <img class="bi d-block mx-auto mb-1" width="24" height="24"
-                                 src="/img/header/grid.png">
-                            Каталог
-                        </a>
-                    </li>
+                        {{-- Cart --}}
+                        <li>
+                            <a href="{{route('categories')}}" class="nav-link text-white">
+                                <img class="bi d-block mx-auto mb-1" width="24" height="24"
+                                     src="/img/header/grid.png">
+                                Каталог
+                            </a>
+                        </li>
                     @endauth
                     {{-- Browse --}}
                     <li>
@@ -36,33 +36,33 @@
                         </a>
                     </li>
                     @auth
-                    {{-- Profile --}}
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-bs-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{-- Profile image --}}
-                                <img src="/img/header/profile.png" class="rounded-circle" width="32"
-                                     height="32"> </a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                {{-- Personal Home Page --}}
-                                <a class="dropdown-item" href="{{ route('user') }}">Моя страница</a>
-                                {{-- Orders --}}
-                                <a class="dropdown-item" href="/user/orders">Мои заказы</a>
-                                <hr class="dropdown-divider">
-                                {{-- Logout --}}
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                        {{-- Profile --}}
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{-- Profile image --}}
+                                    <img src="/img/header/profile.png" class="rounded-circle" width="32"
+                                         height="32"> </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    {{-- Personal Home Page --}}
+                                    <a class="dropdown-item" href="{{ route('user') }}">Моя страница</a>
+                                    {{-- Orders --}}
+                                    <a class="dropdown-item" href="/user/orders">Мои заказы</a>
+                                    <hr class="dropdown-divider">
+                                    {{-- Logout --}}
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-                                    {{ __('Выйти') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
+                                        {{ __('Выйти') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
                     @endauth
                 </div>
             </div>

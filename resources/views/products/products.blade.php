@@ -30,7 +30,8 @@
                                         <div class="container">
                                             <div class="row">
                                                 <div class="mt-2 col-6 col-md-4">
-                                                    <td class="quantity-box"><input type="number" size="4" value="{{ request('quantity', 1) }}"
+                                                    <td class="quantity-box"><input type="number" size="4"
+                                                                                    value="{{ request('quantity', 1) }}"
                                                                                     name="quantity" min="0" step="1"
                                                                                     class="c-input-text qty text"></td>
                                                 </div>

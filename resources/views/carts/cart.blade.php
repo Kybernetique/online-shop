@@ -46,7 +46,8 @@
                                                                                 name="quantity" min="0" step="1"
                                                                                 class="c-input-text qty text"></td>
                                                 <td class="total-pr">
-                                                    <p>{{ number_format($item->product->price * $item->quantity, 2, ',', ' ') }} ₽</p>
+                                                    <p>{{ number_format($item->product->price * $item->quantity, 2, ',', ' ') }}
+                                                        ₽</p>
                                                 </td>
 
                                                 <td class="update-pr">

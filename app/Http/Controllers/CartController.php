@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Cart;
 use App\Models\Item;
 use App\Models\Product;
 use App\Services\CartService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class  CartController extends Controller
 {
@@ -19,7 +16,7 @@ class  CartController extends Controller
         $this->cartService = $cartService;
     }
 
-    public function cart(Request $request)
+    public function cart($request)
     {
         $user = $request->user();
         $cart = $this->cartService->getCartByUser($user);
