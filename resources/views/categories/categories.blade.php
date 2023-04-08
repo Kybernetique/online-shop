@@ -27,7 +27,7 @@
                                        class="w-100 btn btn-lg btn-warning">Перейти</a>
                                 {{-- All products --}}
                                 @else
-                                    <a href="{{route('products')}}" class="w-100 btn btn-lg btn-warning">Перейти</a>
+                                    <a href="{{route('products.index')}}" class="w-100 btn btn-lg btn-warning">Перейти</a>
                                 @endif
                             </div>
                         </div>

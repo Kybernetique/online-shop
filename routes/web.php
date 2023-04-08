@@ -31,7 +31,7 @@ Route::delete('/cart/{item}', [CartController::class, 'destroy'])->name('cart.de
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
-Route::get('/products', [ProductController::class, 'products'])->name('products');
-Route::get('/products/{product}', [ProductController::class, 'product'])->name('product');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/user', [UserController::class, 'user'])->name('user');

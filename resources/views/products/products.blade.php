@@ -12,7 +12,7 @@
                                 {{-- Card header --}}
                                 <div class="card-header py-3 text-bg-dark">
                                     {{-- Product name--}}
-                                    <a class="w-100 btn btn-lg btn-dark" href="{{route('product', $product->id)}}">
+                                    <a class="w-100 btn btn-lg btn-dark" href="{{route('products.show', $product->id)}}">
                                         <h4 class="my-0 fw-normal">{{$product->name}}</h4>
                                     </a>
                                 </div>
