@@ -28,8 +28,8 @@ Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.sto
 Route::patch('/cart/{item}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/{item}', [CartController::class, 'destroy'])->name('cart.destroy');
 
-Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
-Route::get('/categories/{category}', [CategoryController::class, 'category'])->name('category');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::get('/products', [ProductController::class, 'products'])->name('products');
 Route::get('/products/{product}', [ProductController::class, 'product'])->name('product');

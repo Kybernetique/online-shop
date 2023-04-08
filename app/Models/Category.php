@@ -11,6 +11,8 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'categories';
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $fillable = ['name', 'image'];
 
     public function products(): HasMany
     {

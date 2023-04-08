@@ -31,12 +31,12 @@
                         <div>
                             @foreach($cart->items as $item)
                                 <tr>
-                                    {{-- Image --}}
+                                    {{-- Item image --}}
                                     <td>
                                         <img style="max-height: 100px" src="{{$item->product->image}}"
                                              alt="Не удалось загрузить изображение"/>
                                     </td>
-                                    {{-- Name --}}
+                                    {{-- Item name --}}
                                     <td>
                                         <p>{{$item->product->name}}</p>
                                     </td>
