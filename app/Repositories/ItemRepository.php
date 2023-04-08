@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Item;
 use Illuminate\Database\Eloquent\Collection;
+
 class ItemRepository
 {
     public function find(int $id): ?Item

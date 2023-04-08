@@ -24,7 +24,7 @@ class CartService
         $this->itemRepository = $itemRepository;
     }
 
-    public function createCart($user): void
+    private function createCart($user): void
     {
         $this->cartRepository->create([
             'user_id' => $user->id,
@@ -33,21 +33,13 @@ class CartService
 
     public function getCartByUser($user): ?Cart
     {
+        if ($user->cart === null) {
+            $this->createCart($user);
+        }
         return $this->cartRepository->getCartByUser($user);
     }
 
-    public function getTotalPrice(Cart $cart): float
-    {
-        $items = $cart->items()->get();
-
-        $price = 0;
-        foreach ($items as $item) {
-            $price += $item->price;
-        }
-        return $price;
-    }
-
-    public function createOrUpdateItem(Cart $cart, Item $newItem): void
+    public function updateOrCreateItem(Cart $cart, Item $newItem): void
     {
         $items = $cart->items()->get();
         foreach ($items as $cartItem) {
@@ -62,6 +54,7 @@ class CartService
                 return;
             }
         }
+        // if item does not exist in cart
         $this->itemRepository->create([
             'quantity' => $newItem->quantity,
             'price' => $newItem->product->price * $newItem->quantity,
@@ -75,7 +68,6 @@ class CartService
         $this->itemRepository->delete($item);
     }
 
-
     public function updateItemQuantity(Item $item, int $quantity): void
     {
         $this->itemRepository->update($item, [
@@ -84,5 +76,25 @@ class CartService
             'product_id' => $item->product->id,
             'cart_id' => $item->cart->id
         ]);
+    }
+
+    public function getCurrentTotalPrice(Cart $cart): float
+    {
+        $items = $cart->items()->get();
+
+        dump($items);
+        $price = 0.0;
+        foreach ($items as $item) {
+            $price += $item->price;
+            dump('item price', $item->price);
+            dump('price', $price);
+        }
+        return $price;
+    }
+
+    public function updateTotalPrice(Cart $cart)
+    {
+        $updatedPrice = $this->getCurrentTotalPrice($cart);
+        $cart->total_price = $updatedPrice;
     }
 }

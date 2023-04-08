@@ -13,7 +13,7 @@ class Product extends Model
 
     protected $table = 'products';
     protected $guarded = ['id', 'created_at', 'updated_at'];
-    protected $fillable = ['name', 'description', 'price', 'image']; // список разрешенных для изменения атрибутов (полей)
+    protected $fillable = ['name', 'description', 'price', 'image'];
 
     public function category(): BelongsTo
     {

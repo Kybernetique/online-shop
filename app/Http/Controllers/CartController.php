@@ -23,10 +23,9 @@ class  CartController extends Controller
     {
         $user = $request->user();
         $cart = $this->cartService->getCartByUser($user);
-        if ($cart === null) {
-            $this->cartService->createCart($user);
-        }
-        $cart->total_price = $this->cartService->getTotalPrice($cart);
+
+        $this->cartService->updateTotalPrice($cart);
+
         return view('carts.cart', compact('cart'));
     }
 
@@ -35,18 +34,16 @@ class  CartController extends Controller
         $user = $request->user();
         $cart = $this->cartService->getCartByUser($user);
 
-        if ($cart === null) {
-            $this->cartService->createCart($user);
-        }
         $quantity = $request->input('quantity');
-        $item = new Item([
-            'cart_id' => $cart->id,
-            'product_id' => $product->id,
-            'quantity' => $quantity,
-            'price' => $product->price * $quantity
-        ]);
 
-        $this->cartService->createOrUpdateItem($cart, $item);
+        $this->cartService->updateOrCreateItem($cart, new Item(
+                [
+                    'cart_id' => $cart->id,
+                    'product_id' => $product->id,
+                    'quantity' => $quantity,
+                    'price' => $product->price * $quantity
+                ])
+        );
 
         $categoryId = $product->category_id;
         return redirect("/categories/$categoryId");
@@ -64,7 +61,8 @@ class  CartController extends Controller
             ? $this->cartService->updateItemQuantity($item, $quantity)
             : $this->cartService->deleteItem($item);
 
-        $cart->total_price = $this->cartService->getTotalPrice($cart);
+        $this->cartService->updateTotalPrice($cart);
+
         return redirect('/cart');
     }
 }

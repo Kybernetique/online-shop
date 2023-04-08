@@ -12,7 +12,7 @@ class Item extends Model
 
     protected $table = 'items';
     protected $guarded = ['id', 'created_at', 'updated_at'];
-    protected $fillable = ['quantity', 'price', 'product_id', 'cart_id']; // список разрешенных для изменения атрибутов (полей)
+    protected $fillable = ['quantity', 'price', 'product_id', 'cart_id'];
 
     public function cart(): BelongsTo
     {
