@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 
-class  CartController extends Controller
+class CartController extends Controller
 {
     private CartService $cartService;
 
@@ -20,13 +20,10 @@ class  CartController extends Controller
     {
         $user = $request->user();
         $cart = $this->cartService->getCartByUser($user);
-
-        $this->cartService->updateTotalPrice($cart);
-
         return view('carts.cart', compact('cart'));
     }
 
-    public function addItem(Product $product, Request $request)
+    public function createItem(Product $product, Request $request)
     {
         $user = $request->user();
         $cart = $this->cartService->getCartByUser($user);
@@ -42,24 +39,19 @@ class  CartController extends Controller
                 ])
         );
 
-        $categoryId = $product->category_id;
-        return redirect("/categories/$categoryId");
+        return redirect("/categories/$product->category_id");
     }
 
     public function updateItem(Item $item, Request $request)
     {
-        $user = $request->user();
-        $cart = $this->cartService->getCartByUser($user);
-
-        $action = $request->input('action');
         $quantity = $request->input('quantity');
+        $this->cartService->updateItemQuantity($item, $quantity);
+        return redirect('/cart');
+    }
 
-        $action == 'update'
-            ? $this->cartService->updateItemQuantity($item, $quantity)
-            : $this->cartService->deleteItem($item);
-
-        $this->cartService->updateTotalPrice($cart);
-
+    public function deleteItem(Item $item)
+    {
+        $this->cartService->deleteItem($item);
         return redirect('/cart');
     }
 }

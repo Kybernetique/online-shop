@@ -23,19 +23,13 @@ class CartService
         if ($user->cart === null) {
             $this->createCart($user);
         }
+        $this->updateTotalPrice($user->cart);
         return $this->cartRepository->getCartByUser($user);
-    }
-
-    private function createCart($user): void
-    {
-        $this->cartRepository->create([
-            'user_id' => $user->id,
-        ]);
     }
 
     public function updateOrCreateItem(Cart $cart, Item $newItem): void
     {
-        $items = $cart->items()->get();
+        $items = $cart->items;
         foreach ($items as $cartItem) {
             // if item already exists in cart
             if ($cartItem->product_id === $newItem->product_id) {
@@ -59,33 +53,38 @@ class CartService
 
     public function deleteItem(Item $item)
     {
+        $cart = $item->cart;
         $this->itemRepository->delete($item);
+        $this->updateTotalPrice($cart);
     }
 
     public function updateItemQuantity(Item $item, int $quantity): void
     {
+        $cart = $item->cart;
         $this->itemRepository->update($item, [
             'quantity' => $quantity,
             'price' => $item->product->price * $quantity,
             'product_id' => $item->product->id,
             'cart_id' => $item->cart->id
         ]);
+        $this->updateTotalPrice($cart);
     }
 
-    public function updateTotalPrice(Cart $cart)
+    private function createCart($user): void
     {
-        $updatedPrice = $this->getCurrentTotalPrice($cart);
-        $cart->total_price = $updatedPrice;
+        $this->cartRepository->create([
+            'user_id' => $user->id,
+        ]);
     }
 
-    public function getCurrentTotalPrice(Cart $cart): float
+    private function updateTotalPrice(Cart $cart): void
     {
-        $items = $cart->items()->get();
+        $items = $cart->items;
 
-        $price = 0.0;
+        $updatedPrice = 0.0;
         foreach ($items as $item) {
-            $price += $item->price;
+            $updatedPrice += $item->price;
         }
-        return $price;
+        $cart->total_price = $updatedPrice;
     }
 }
