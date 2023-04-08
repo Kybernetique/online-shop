@@ -20,7 +20,7 @@ class CartController extends Controller
     {
         $user = $request->user();
         $cart = $this->cartService->getCartByUser($user);
-        return view('carts.cart', compact('cart'));
+        return view('cart.index', compact('cart'));
     }
 
     public function store(Product $product, Request $request)
