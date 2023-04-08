@@ -16,14 +16,14 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
-    public function cart(Request $request)
+    public function index(Request $request)
     {
         $user = $request->user();
         $cart = $this->cartService->getCartByUser($user);
         return view('carts.cart', compact('cart'));
     }
 
-    public function createItem(Product $product, Request $request)
+    public function store(Product $product, Request $request)
     {
         $user = $request->user();
         $cart = $this->cartService->getCartByUser($user);
@@ -42,14 +42,14 @@ class CartController extends Controller
         return redirect("/categories/$product->category_id");
     }
 
-    public function updateItem(Item $item, Request $request)
+    public function update(Item $item, Request $request)
     {
         $quantity = $request->input('quantity');
         $this->cartService->updateItemQuantity($item, $quantity);
         return redirect('/cart');
     }
 
-    public function deleteItem(Item $item)
+    public function destroy(Item $item)
     {
         $this->cartService->deleteItem($item);
         return redirect('/cart');

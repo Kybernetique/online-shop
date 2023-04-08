@@ -46,8 +46,9 @@
                                     </td>
                                     {{-- Update action --}}
                                     <td>
-                                        <form method="POST" action="{{route('update-item', $item->id)}}">
+                                        <form method="POST" action="{{route('cart.update', $item->id)}}">
                                             @csrf
+                                            @method('PATCH')
                                             <input type="hidden" name="id" value="{{$item->id}}">
                                             <input type="number" size="4"
                                                    value="{{$item->quantity}}"
@@ -62,8 +63,9 @@
                                     </td>
                                     {{-- Delete action--}}
                                     <td>
-                                        <form method="POST" action="{{route('delete-item', $item->id)}}">
+                                        <form method="POST" action="{{route('cart.destroy', $item->id)}}">
                                             @csrf
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Удалить</button>
                                         </form>
                                     </td>

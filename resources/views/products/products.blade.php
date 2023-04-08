@@ -25,7 +25,7 @@
                                         </b>
                                     </ul>
                                     {{-- Cart --}}
-                                    <form method="POST" action="{{route('add-to-cart', $product->id)}}">
+                                    <form method="POST" action="{{route('cart.store', $product->id)}}">
                                         @csrf
                                         <div class="container">
                                             <div class="row">
