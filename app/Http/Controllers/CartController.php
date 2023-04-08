@@ -16,7 +16,7 @@ class  CartController extends Controller
         $this->cartService = $cartService;
     }
 
-    public function cart($request)
+    public function cart(Request $request)
     {
         $user = $request->user();
         $cart = $this->cartService->getCartByUser($user);
