@@ -90,12 +90,12 @@
         {{-- Cart items --}}
         <div class="row justify-content-center">
             <div class="col-md-4 mb-5 mt-5">
-
-                @foreach($items as $item)
-                    <input type="hidden" name="items[]" value="{{$item->id}}">
+                <h4>Заказы</h4>
+                @foreach($products as $product)
+                    <input type="hidden" name="products[]" value="{{$product->id}}">
                     <ul class="list-group">
-                        <input type="hidden" name="product_id" value="{{ $item->product->id }}">
-                        <li class="list-group-item">{{$item->product->name}} ({{$item->quantity}} шт.)</li>
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <li class="list-group-item">{{$product->name}} ({{$product->pivot->quantity}} шт.)</li>
                     </ul>
                 @endforeach
             </div>

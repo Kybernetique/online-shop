@@ -3,10 +3,8 @@
 namespace App\Services;
 
 use App\Models\Cart;
-use App\Models\Item;
 use App\Models\Product;
 use App\Repositories\CartRepository;
-use App\Repositories\ItemRepository;
 use App\Repositories\ProductRepository;
 
 class CartService
@@ -28,6 +26,7 @@ class CartService
             'price' => $data['price'],
             'quantity' => $data['quantity']
         ]);
+        $this->updateTotalPrice($cart);
     }
 
     public function update(Cart $cart, array $data): void
@@ -38,15 +37,30 @@ class CartService
             'quantity' => $quantity,
             'price' => $quantity * $product->price
         ]);
+        $this->updateTotalPrice($cart);
     }
 
     public function destroy(Cart $cart, Product $product): void
     {
         $cart->products()->detach($product->id, ['quantity' => 0, 'price' => 0]);
+        $this->updateTotalPrice($cart);
     }
 
     public function getCartById($id)
     {
-        return $this->cartRepository->find($id);
+        $cart = $this->cartRepository->find($id);
+        $this->updateTotalPrice($cart);
+        return $cart;
+    }
+
+    private function updateTotalPrice(Cart $cart): void
+    {
+        $products = $cart->products()->get();
+
+        $updatedPrice = 0.0;
+        foreach ($products as $product) {
+            $updatedPrice += $product->pivot->price;
+        }
+        $cart->total_price = $updatedPrice;
     }
 }
