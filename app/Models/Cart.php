@@ -15,7 +15,6 @@ class Cart extends Model
     protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $fillable = ['total_price', 'user_id'];
 
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

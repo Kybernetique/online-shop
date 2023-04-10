@@ -91,7 +91,7 @@
     {{-- Place order --}}
     @if($cart->items()->count() != 0)
         <div class="row">
-            <div class="text-center"><a href="/user/cart/order"
+            <div class="text-center"><a href="{{ route('orders.create') }}"
                                         class="ml-auto btn btn-lg btn-warning">Оформить заказ</a></div>
         </div>
     @endif
