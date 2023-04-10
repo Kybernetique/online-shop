@@ -17,25 +17,23 @@
                             Главная
                         </a>
                     </li>
-                    @auth
-                        {{-- Cart --}}
-                        <li>
-                            <a href="{{route('categories.index')}}" class="nav-link text-white">
-                                <img class="bi d-block mx-auto mb-1" width="24" height="24"
-                                     src="/img/header/grid.png">
-                                Каталог
-                            </a>
-                        </li>
-                    @endauth
                     {{-- Browse --}}
                     <li>
-                        <a href="{{route('cart.index')}}" class="nav-link text-white">
+                        <a href="{{route('categories.index')}}" class="nav-link text-white">
                             <img class="bi d-block mx-auto mb-1" width="24" height="24"
-                                 src="/img/header/cart.png">
-                            Корзина
+                                 src="/img/header/grid.png">
+                            Каталог
                         </a>
                     </li>
                     @auth
+                        {{-- Cart --}}
+                        <li>
+                            <a href="{{route('cart.index')}}" class="nav-link text-white">
+                                <img class="bi d-block mx-auto mb-1" width="24" height="24"
+                                     src="/img/header/cart.png">
+                                Корзина
+                            </a>
+                        </li>
                         {{-- Profile --}}
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">

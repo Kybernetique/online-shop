@@ -25,9 +25,4 @@ class CartRepository
     {
         return $cart->delete();
     }
-
-    public function getCartByUser($user): ?Cart
-    {
-        return $user->cart;
-    }
 }
