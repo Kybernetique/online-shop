@@ -4,17 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends Model
 {
     use HasFactory;
+
     protected $table = 'orders';
     protected $guarded = ['id', 'created_at', 'updated_at'];
-    protected $fillable = ['name', 'phone_number', 'email', 'city', 'shipping_address', 'comment'];
+    protected $fillable = ['name', 'phone_number', 'email', 'city', 'shipping_address', 'comment', 'user_id'];
 
-    public function products(): BelongsToMany
+    public function user(): BelongsTo
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsTo(User::class);
     }
 }

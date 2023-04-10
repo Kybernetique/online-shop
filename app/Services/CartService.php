@@ -4,87 +4,49 @@ namespace App\Services;
 
 use App\Models\Cart;
 use App\Models\Item;
+use App\Models\Product;
 use App\Repositories\CartRepository;
 use App\Repositories\ItemRepository;
+use App\Repositories\ProductRepository;
 
 class CartService
 {
     private CartRepository $cartRepository;
-    private ItemRepository $itemRepository;
+    private ProductRepository $productRepository;
 
-    public function __construct(CartRepository $cartRepository, ItemRepository $itemRepository)
+    public function __construct(CartRepository $cartRepository, ProductRepository $productRepository)
     {
         $this->cartRepository = $cartRepository;
-        $this->itemRepository = $itemRepository;
+        $this->productRepository = $productRepository;
     }
 
-    public function getCartByUser($user): ?Cart
+    public function store(Cart $cart, array $data): void
     {
-        if ($user->cart === null) {
-            $this->createCart($user);
-        }
-        $this->updateTotalPrice($user->cart);
-        return $this->cartRepository->getCartByUser($user);
-    }
+        $product = $this->productRepository->find($data['product_id']);
 
-    public function updateOrCreateItem(Cart $cart, Item $newItem): void
-    {
-        $items = $cart->items;
-        foreach ($items as $cartItem) {
-            // if item already exists in cart
-            if ($cartItem->product_id === $newItem->product_id) {
-                $this->itemRepository->update($cartItem, [
-                    'quantity' => $cartItem->quantity + $newItem->quantity,
-                    'price' => $cartItem->price + $newItem->price,
-                    'product_id' => $newItem->product->id,
-                    'cart_id' => $newItem->cart->id
-                ]);
-                return;
-            }
-        }
-        // if item does not exist in cart
-        $this->itemRepository->create([
-            'quantity' => $newItem->quantity,
-            'price' => $newItem->product->price * $newItem->quantity,
-            'product_id' => $newItem->product->id,
-            'cart_id' => $newItem->cart->id
+        $cart->products()->attach($product, [
+            'price' => $data['price'],
+            'quantity' => $data['quantity']
         ]);
     }
 
-    public function deleteItem(Item $item)
+    public function update(Cart $cart, array $data): void
     {
-        $cart = $item->cart;
-        $this->itemRepository->delete($item);
-        $this->updateTotalPrice($cart);
-    }
-
-    public function updateItemQuantity(Item $item, int $quantity): void
-    {
-        $cart = $item->cart;
-        $this->itemRepository->update($item, [
+        $product = $this->productRepository->find($data['product_id']);
+        $quantity = $data['quantity'];
+        $cart->products()->updateExistingPivot($product->id, [
             'quantity' => $quantity,
-            'price' => $item->product->price * $quantity,
-            'product_id' => $item->product->id,
-            'cart_id' => $item->cart->id
-        ]);
-        $this->updateTotalPrice($cart);
-    }
-
-    private function createCart($user): void
-    {
-        $this->cartRepository->create([
-            'user_id' => $user->id,
+            'price' => $quantity * $product->price
         ]);
     }
 
-    private function updateTotalPrice(Cart $cart): void
+    public function destroy(Cart $cart, Product $product): void
     {
-        $items = $cart->items;
+        $cart->products()->detach($product->id, ['quantity' => 0, 'price' => 0]);
+    }
 
-        $updatedPrice = 0.0;
-        foreach ($items as $item) {
-            $updatedPrice += $item->price;
-        }
-        $cart->total_price = $updatedPrice;
+    public function getCartById($id)
+    {
+        return $this->cartRepository->find($id);
     }
 }

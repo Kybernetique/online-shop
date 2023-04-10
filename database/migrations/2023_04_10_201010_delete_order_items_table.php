@@ -11,29 +11,30 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_products', function (Blueprint $table) {
-            $table->unsignedBigInteger('order_id');
-            $table->foreign('order_id')
-                ->references('id')
-                ->on('orders')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')
-                ->references('id')
-                ->on('products')
-                ->onDelete('cascade');
-
-            $table->timestamps();
-            $table->primary(['order_id', 'product_id']);
-        });
-    }
+        Schema::table('order_items', function () {
+            Schema::dropIfExists('order_items');
+        });    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_products');
+        Schema::create('order_items', function (Blueprint $table) {
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')
+                ->references('id')
+                ->on('orders')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('item_id');
+            $table->foreign('item_id')
+                ->references('id')
+                ->on('items')
+                ->onDelete('cascade');
+
+            $table->timestamps();
+            $table->primary(['order_id', 'item_id']);
+        });
     }
 };

@@ -19,4 +19,9 @@ class OrderService
         $this->orderRepository->create($data);
     }
 
+    public function attachItems(Order $order, array $data)
+    {
+        $order->items()->attach($data);
+    }
+
 }

@@ -26,8 +26,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
-Route::patch('/cart/{item}', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/{item}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::patch('/cart/{product}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');

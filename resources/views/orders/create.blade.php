@@ -6,12 +6,15 @@
         {{-- Order placing header --}}
         <div class="text-center mt-5 mb-5"><h1>Оформление заказа</h1></div>
 
+        {{-- User id--}}
+        <input type="hidden" name="user_id" value="{{$user->id}}">
         {{-- Name, Phone number and Email row--}}
         <div class="row justify-content-center">
             <!-- Name -->
             <div class="col-md-2 mb-3">
                 <label for="validationTooltip01">Имя</label>
-                <input type="text" name="name" class="form-control" id="validationTooltip01" value="Антон" placeholder="Имя" required>
+                <input type="text" name="name" class="form-control" id="validationTooltip01" value="Антон"
+                       placeholder="Имя" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите Ваше имя.
                 </div>
@@ -68,7 +71,8 @@
             <!-- Shipping Address -->
             <div class="col-md-3 mb-3">
                 <label for="validationCustom04">Адрес доставки</label>
-                <input type="text" name="shipping_address" class="form-control" id="validationCustom04" value="ул. Тестовая"
+                <input type="text" name="shipping_address" class="form-control" id="validationCustom04"
+                       value="ул. Тестовая"
                        placeholder="Адрес доставки" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите адрес доставки.
@@ -86,11 +90,12 @@
         {{-- Cart items --}}
         <div class="row justify-content-center">
             <div class="col-md-4 mb-5 mt-5">
-                <p>Заказы</p>
+
                 @foreach($items as $item)
-                    <input type="hidden" name="cart" value="{{$item->product}}">
+                    <input type="hidden" name="items[]" value="{{$item->id}}">
                     <ul class="list-group">
-                        <li class="list-group-item">{{$item->product->name}}    ({{$item->quantity}} шт.)</li>
+                        <input type="hidden" name="product_id" value="{{ $item->product->id }}">
+                        <li class="list-group-item">{{$item->product->name}} ({{$item->quantity}} шт.)</li>
                     </ul>
                 @endforeach
             </div>

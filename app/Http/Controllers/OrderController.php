@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Services\CartService;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
@@ -17,10 +18,12 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $user = $request->user();
-
+        $orders = $user->orders()->get();
+        dd($orders);
+        return view('orders.index', compact('user', 'orders'));
     }
 
     public function create(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
@@ -32,19 +35,24 @@ class OrderController extends Controller
         return view('orders.create', compact('items', 'user'));
     }
 
-    public function store(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function store(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
+
         $data = request()->validate(
             [
-                'name' => 'string',
-                'phone_number' => 'string',
-                'email' => 'string',
-                'city' => 'string',
-                'shipping_address' => 'string',
+                'name' => 'required|string',
+                'phone_number' => 'required|string',
+                'email' => 'required|string',
+                'city' => 'required|string',
+                'shipping_address' => 'required|string',
                 'comment' => 'string',
+                'user_id' => 'integer',
+                'items' => 'array|exists:items,id'
             ]
         );
+        $order = $this->orderService->createOrder($data);
+            Order::save();
         $this->orderService->createOrder($data);
-        return view('orders.index');
+        return view('orders.show', compact('data'));
     }
 }

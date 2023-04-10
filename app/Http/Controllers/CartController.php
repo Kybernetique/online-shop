@@ -19,39 +19,45 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $cart = $this->cartService->getCartByUser($user);
-        return view('cart.index', compact('cart'));
+        $cart = $this->cartService->getCartById($user->cart_id);
+        $products = $cart->products;
+        return view('cart.index', compact('cart', 'products'));
     }
 
     public function store(Product $product, Request $request)
     {
         $user = $request->user();
-        $cart = $this->cartService->getCartByUser($user);
-
+        $cart = $this->cartService->getCartById($user->cart_id);
         $quantity = $request->input('quantity');
+        $data = [
+            'product_id' => $product->id,
+            'quantity' => $quantity,
+            'price' => $quantity * $product->price,
+        ];
 
-        $this->cartService->updateOrCreateItem($cart, new Item(
-                [
-                    'cart_id' => $cart->id,
-                    'product_id' => $product->id,
-                    'quantity' => $quantity,
-                    'price' => $product->price * $quantity
-                ])
-        );
+        $this->cartService->store($cart, $data);
 
         return redirect("/categories/$product->category_id");
     }
 
-    public function update(Item $item, Request $request)
+    public function update(Product $product, Request $request)
     {
+        $user = $request->user();
+        $cart = $this->cartService->getCartById($user->cart_id);
         $quantity = $request->input('quantity');
-        $this->cartService->updateItemQuantity($item, $quantity);
+        $data = [
+            'quantity' => $quantity,
+            'product_id' => $product->id
+        ];
+        $this->cartService->update($cart, $data);
         return redirect('/cart');
     }
 
-    public function destroy(Item $item)
+    public function destroy(Product $product, Request $request)
     {
-        $this->cartService->deleteItem($item);
+        $user = $request->user();
+        $cart = $this->cartService->getCartById($user->cart_id);
+        $this->cartService->destroy($cart, $product);
         return redirect('/cart');
     }
 }
