@@ -29,7 +29,7 @@
                                     <tr>
                                         <td>
                                             <!-- Order date -->
-                                            <span><b>null</b></span>
+                                            <span><b>{{now()->format('d-m-Y')}}</b></span>
                                         </td>
                                         <td>
                                             <!-- Product name -->
