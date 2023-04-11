@@ -27,4 +27,11 @@ class Product extends Model
             'cart_id')
             ->withPivot(['quantity','price']);
     }
+
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class, 'order_products', 'product_id',
+            'order_id')
+            ->withPivot(['quantity','total_price']);
+    }
 }

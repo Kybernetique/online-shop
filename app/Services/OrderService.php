@@ -14,14 +14,19 @@ class OrderService
         $this->orderRepository = $orderRepository;
     }
 
-    public function createOrder(array $data): void
+    public function create(array $data): Order
     {
-        $this->orderRepository->create($data);
+        return $this->orderRepository->create($data);
     }
 
-    public function attachItems(Order $order, array $data)
+    public function store(Order $order, $products): void
     {
-        $order->items()->attach($data);
+        foreach ($products as $product) {
+            $order->products()->attach($product, [
+                'quantity' => $product->pivot->quantity,
+                'total_price' => $product->pivot->price
+            ]);
+        }
     }
 
 }

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
 use App\Models\Product;
 use App\Services\CartService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class CartController extends Controller
 {
@@ -16,7 +20,7 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
-    public function index(Request $request)
+    public function index(Request $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $user = $request->user();
         $cart = $this->cartService->getCartById($user->cart_id);
@@ -24,7 +28,7 @@ class CartController extends Controller
         return view('cart.index', compact('cart', 'products'));
     }
 
-    public function store(Product $product, Request $request)
+    public function store(Product $product, Request $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $user = $request->user();
         $cart = $this->cartService->getCartById($user->cart_id);
@@ -40,7 +44,7 @@ class CartController extends Controller
         return redirect("/categories/$product->category_id");
     }
 
-    public function update(Product $product, Request $request)
+    public function update(Product $product, Request $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $user = $request->user();
         $cart = $this->cartService->getCartById($user->cart_id);
@@ -53,7 +57,7 @@ class CartController extends Controller
         return redirect('/cart');
     }
 
-    public function destroy(Product $product, Request $request)
+    public function destroy(Product $product, Request $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $user = $request->user();
         $cart = $this->cartService->getCartById($user->cart_id);
