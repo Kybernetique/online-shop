@@ -12,8 +12,8 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    private CartService $cartService;
     private OrderService $orderService;
+    private CartService $cartService;
 
     public function __construct(CartService $cartService, OrderService $orderService)
     {
@@ -25,8 +25,13 @@ class OrderController extends Controller
     {
         $user = $request->user();
         $orders = $user->orders()->get();
-        dd($orders);
         return view('orders.index', compact('user', 'orders'));
+    }
+
+    public function show(Order $order)
+    {
+        dd($order->products->get());
+        return view('products.index', compact('category'), compact('products'));
     }
 
     public function create(Request $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -39,7 +44,9 @@ class OrderController extends Controller
 
     public function store(Request $request): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-
+        $user = $request->user();
+        $cart = $this->cartService->getCartById($user->cart_id);
+        $products = $cart->products()->get();
         $data = request()->validate(
             [
                 'name' => 'required|string',
@@ -48,13 +55,12 @@ class OrderController extends Controller
                 'city' => 'required|string',
                 'shipping_address' => 'required|string',
                 'comment' => 'string',
-                'user_id' => 'integer',
-                'products' => 'array|exists:products,id'
+                'user_id' => 'required|integer'
             ]
         );
-        dd($data);
-        $order = $this->orderService->createOrder($data);
-        $this->orderService->createOrder($data);
-        return view('orders.show', compact('data'));
+        $order = $this->orderService->create($data);
+        $this->orderService->store($order, $products);
+        $this->cartService->detach($cart);
+        return view('orders.show', compact('order'));
     }
 }

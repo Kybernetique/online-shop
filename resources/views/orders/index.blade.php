@@ -14,21 +14,28 @@
                 </tr>
                 </thead>
                 <tbody>
-{{--                @foreach($orders as $order)--}}
-                    <tr>
-{{--                        <th scope="row" {{$order->id}}></th>--}}
-{{--                        <td>{{$order->product->name}}</td>--}}
-{{--                        <td th:text="${#numbers.formatDecimal(info.product.price, 2, 'WHITESPACE', 2, 'COMMA')} + ' ₽'"></td>--}}
-{{--                        <td th:text="${info.quantity}"></td>--}}
-{{--                        <td th:text="${#numbers.formatDecimal(info.totalPrice, 2, 'WHITESPACE', 2, 'COMMA') + ' ₽'}"></td>--}}
-                    </tr>
-                    <tr>
-                        <th scope="row"></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-{{--                @endforeach--}}
+                @foreach($orders as $order)
+                    @foreach($order->products()->get() as $key => $product)
+                        <tr>
+                            @if($key === 0)
+                                <th>{{$order->id}}</th>
+                            @else
+                                <th></th>
+                            @endif
+                            <td>{{$product->name}}</td>
+                            <td>{{ number_format($product->price, 2, ',', ' ') }} ₽</td>
+                            <td>{{$product->pivot->quantity}}</td>
+                            <td>{{ number_format($product->pivot->total_price, 2, ',', ' ') }} ₽</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                @endforeach
+                @endforeach
             </table>
         </div>
     </div>

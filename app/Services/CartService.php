@@ -46,7 +46,7 @@ class CartService
         $this->updateTotalPrice($cart);
     }
 
-    public function getCartById($id)
+    public function getCartById($id): Cart
     {
         $cart = $this->cartRepository->find($id);
         $this->updateTotalPrice($cart);
@@ -62,5 +62,11 @@ class CartService
             $updatedPrice += $product->pivot->price;
         }
         $cart->total_price = $updatedPrice;
+    }
+
+    public function detach(Cart $cart): void
+    {
+        $cart->products()->detach();
+
     }
 }

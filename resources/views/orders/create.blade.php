@@ -13,7 +13,7 @@
             <!-- Name -->
             <div class="col-md-2 mb-3">
                 <label for="validationTooltip01">Имя</label>
-                <input type="text" name="name" class="form-control" id="validationTooltip01" value="Антон"
+                <input type="text" name="name" class="form-control" id="validationTooltip01" value="{{$user->name}}"
                        placeholder="Имя" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите Ваше имя.
@@ -23,7 +23,7 @@
             <!-- Phone Number -->
             <div class="col-md-2 mb-3">
                 <label for="validationCustom05">Номер телефона</label>
-                <input type="text" name="phone_number" class="form-control" value="89876380847" id="validationCustom05"
+                <input type="text" name="phone_number" class="form-control" id="validationCustom05"
                        placeholder="Номер телефона" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите номер телефона.
@@ -72,7 +72,6 @@
             <div class="col-md-3 mb-3">
                 <label for="validationCustom04">Адрес доставки</label>
                 <input type="text" name="shipping_address" class="form-control" id="validationCustom04"
-                       value="ул. Тестовая"
                        placeholder="Адрес доставки" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите адрес доставки.
@@ -92,7 +91,7 @@
             <div class="col-md-4 mb-5 mt-5">
                 <h4>Заказы</h4>
                 @foreach($products as $product)
-                    <input type="hidden" name="products[]" value="{{$product->id}}">
+                    <input type="hidden" name="products[]" value="{{$product}}">
                     <ul class="list-group">
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <li class="list-group-item">{{$product->name}} ({{$product->pivot->quantity}} шт.)</li>

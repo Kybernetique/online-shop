@@ -11,6 +11,10 @@ class ProductRepository
         return Product::find($id);
     }
 
+    public function findAll() {
+        return Product::findAll();
+    }
+
     public function create(array $data): Product
     {
         return Product::create($data);

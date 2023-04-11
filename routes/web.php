@@ -34,6 +34,7 @@ Route::get('/categories/{category}', [CategoryController::class, 'show'])->name(
 
 Route::get('/user/orders', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+Route::get('/orders/{order}', [CategoryController::class, 'show'])->name('orders.show');
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');

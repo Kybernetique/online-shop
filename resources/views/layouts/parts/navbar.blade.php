@@ -47,7 +47,7 @@
                                     {{-- Personal Home Page --}}
                                     <a class="dropdown-item" href="{{ route('user') }}">Моя страница</a>
                                     {{-- Orders --}}
-                                    <a class="dropdown-item" href="/user/orders">Мои заказы</a>
+                                    <a class="dropdown-item" href="{{route('orders.index')}}">Мои заказы</a>
                                     <hr class="dropdown-divider">
                                     {{-- Logout --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
