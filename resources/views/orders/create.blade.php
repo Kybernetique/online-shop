@@ -12,8 +12,8 @@
         <div class="row justify-content-center">
             <!-- Name -->
             <div class="col-md-2 mb-3">
-                <label for="validationTooltip01">Имя</label>
-                <input type="text" name="name" class="form-control" id="validationTooltip01" value="{{$user->name}}"
+                <label for="validationTooltipName">Имя</label>
+                <input type="text" name="name" class="form-control" id="validationTooltipName" value="{{$user->name}}"
                        placeholder="Иван" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите Ваше имя.
@@ -22,9 +22,9 @@
 
             <!-- Phone Number -->
             <div class="col-md-2 mb-3">
-                <label for="validationCustom05">Номер телефона</label>
-                <input type="text" name="phone_number" class="form-control" id="validationCustom05"
-                       placeholder="89997896858" required>
+                <label for="validationCustomPhoneNumber">Номер телефона</label>
+                <input type="text" name="phone_number" class="form-control" id="validationCustomPhoneNumber"
+                       placeholder="89997896959" value="89997896959" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите номер телефона.
                 </div>
@@ -50,31 +50,54 @@
             </div>
         </div>
 
-        {{-- City, Shipping address and comment row--}}
+        {{-- Shipping address, entrance, door's password, floor, apartment --}}
         <div class="row justify-content-center">
-            <!-- City -->
-            <div class="col-md-1 mb-3">
-                <label for="controlSelect1">Город</label>
-                <select class="form-control" id="controlSelect1" name="city">
-                    <option>Москва</option>
-                    <option>Санкт-Петербург</option>
-                    <option>Казань</option>
-                    <option>Самара</option>
-                    <option>Ульяновск</option>
-                    <option>Нижний Новгород</option>
-                </select>
+            <!-- Shipping Address -->
+            <div class="col-md-4 mb-3 mt-4">
+                <label for="validationCustomShippingAddress">Адрес доставки</label>
+                <input type="text" name="shipping_address" class="form-control" id="validationCustomShippingAddress"
+                       placeholder="г. Москва, ул. Маломосковская, д. 7, корп. 1" value="г. Москва, ул. Маломосковская, д. 7, корп. 1" required>
                 <div class="invalid-feedback">
-                    Пожалуйста, выберите город.
+                    Пожалуйста, введите адрес доставки.
                 </div>
             </div>
 
-            <!-- Shipping Address -->
-            <div class="col-md-3 mb-3">
-                <label for="validationCustom04">Адрес доставки</label>
-                <input type="text" name="shipping_address" class="form-control" id="validationCustom04"
-                       placeholder="Адрес доставки" required>
-                <div class="invalid-feedback">
-                    Пожалуйста, введите адрес доставки.
+            <div class="row justify-content-center">
+                {{-- Entrance --}}
+                <div class="col-md-1 mb-3">
+                    <label for="validationCustomEntrance">Подъезд</label>
+                    <input type="text" name="entrance" class="form-control" id="validationCustomEntrance"
+                           placeholder="1" value="1" required>
+                    <div class="invalid-feedback">
+                        Пожалуйста, введите номер подъезда.
+                    </div>
+                </div>
+                {{-- Door's password --}}
+                <div class="col-md-1 mb-3">
+                    <label for="validationCustomDoorPassword">Код двери</label>
+                    <input type="text" name="door_password" class="form-control" id="validationCustomDoorPassword"
+                           placeholder="15" value="15" required>
+                    <div class="invalid-feedback">
+                        Пожалуйста, введите код двери.
+                    </div>
+                </div>
+                {{-- Floor --}}
+                <div class="col-md-1 mb-3">
+                    <label for="validationCustomFloor">Этаж</label>
+                    <input type="text" name="floor" class="form-control" id="validationCustomFloor"
+                           placeholder="4" value="4" required>
+                    <div class="invalid-feedback">
+                        Пожалуйста, введите номер этажа.
+                    </div>
+                </div>
+                {{-- Apartment --}}
+                <div class="col-md-1 mb-3">
+                    <label for="validationCustomApartment">Квартира</label>
+                    <input type="text" name="apartment" class="form-control" id="validationCustomApartment"
+                           placeholder="15" value="15" required>
+                    <div class="invalid-feedback">
+                        Пожалуйста, введите номер квартиры.
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,10 +109,10 @@
             </div>
         </div>
 
-        {{-- Cart items --}}
+        {{-- Orders --}}
         <div class="row justify-content-center">
-            <div class="col-md-4 mb-5 mt-5">
-                <h4>Заказы</h4>
+            <div class="col-md-4 mb-5 mt-4">
+                <h5>Заказы</h5>
                 @foreach($products as $product)
                     <input type="hidden" name="products[]" value="{{$product}}">
                     <ul class="list-group">

@@ -26,7 +26,7 @@
                                     <ul class="list-unstyled mt-3 mb-4">
                                         <b>
                                             <li>
-                                                <p>{{$product->price}} ₽</p>
+                                                <p>{{number_format($product->price, 2, ',', ' ')}} ₽</p>
                                             </li>
                                         </b>
                                     </ul>

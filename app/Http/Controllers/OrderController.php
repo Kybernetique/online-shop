@@ -47,15 +47,19 @@ class OrderController extends Controller
         $user = $request->user();
         $cart = $this->cartService->getCartById($user->cart_id);
         $products = $cart->products()->get();
+
         $data = request()->validate(
             [
+                'user_id' => 'required|integer',
                 'name' => 'required|string',
                 'phone_number' => 'required|string',
                 'email' => 'required|string',
-                'city' => 'required|string',
                 'shipping_address' => 'required|string',
-                'comment' => 'string',
-                'user_id' => 'required|integer'
+                'entrance' => 'required|integer',
+                'door_password' => 'required|integer',
+                'floor' => 'required|integer',
+                'apartment' => 'required|integer',
+                'comment' => 'nullable|string'
             ]
         );
         $order = $this->orderService->create($data);

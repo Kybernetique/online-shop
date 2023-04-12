@@ -13,7 +13,7 @@ class Order extends Model
 
     protected $table = 'orders';
     protected $guarded = ['id', 'created_at', 'updated_at'];
-    protected $fillable = ['name', 'phone_number', 'email', 'city', 'shipping_address', 'comment', 'user_id'];
+    protected $fillable = ['name', 'phone_number', 'email', 'shipping_address', 'entrance', 'door_password', 'floor', 'apartment', 'comment', 'user_id'];
 
     public function user(): BelongsTo
     {
