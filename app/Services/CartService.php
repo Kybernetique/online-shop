@@ -61,6 +61,8 @@ class CartService
         foreach ($products as $product) {
             $updatedPrice += $product->pivot->price;
         }
-        $cart->total_price = $updatedPrice;
+        $this->cartRepository->update($cart, [
+            'total_price' => $updatedPrice
+        ]);
     }
 }
