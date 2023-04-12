@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use App\Repositories\CartRepository;
 use App\Repositories\ProductRepository;
+use Illuminate\Support\Facades\DB;
 
 class CartService
 {
@@ -20,12 +21,23 @@ class CartService
 
     public function store(Cart $cart, array $data): void
     {
-        $product = $this->productRepository->find($data['product_id']);
 
-        $cart->products()->attach($product, [
-            'price' => $data['price'],
-            'quantity' => $data['quantity']
-        ]);
+        $product = $this->productRepository->find($data['product_id']);
+        if ($cart->products()->find($product->id)) {
+//            $cart->products()->sync([$product->id => [
+//                'price' => $data['price'],
+//                'quantity' => $data['quantity']
+//            ]]);
+            $cart->products()->syncWithoutDetaching([$product->id => [
+                'price' => DB::raw('price + ' . $data['price']),
+                'quantity' => DB::raw('quantity + ' . $data['quantity'])
+            ]]);
+        } else {
+            $cart->products()->attach($product, [
+                'price' => $data['price'],
+                'quantity' => $data['quantity']
+            ]);
+        }
         $this->updateTotalPrice($cart);
     }
 
