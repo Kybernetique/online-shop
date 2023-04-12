@@ -25,7 +25,7 @@
                             <td>{{$product->name}}</td>
                             <td>{{ number_format($product->price, 2, ',', ' ') }} ₽</td>
                             <td>{{$product->pivot->quantity}}</td>
-                            <td>{{ number_format($product->pivot->total_price, 2, ',', ' ') }} ₽</td>
+                            <td>{{ number_format($product->pivot->price, 2, ',', ' ') }} ₽</td>
                         </tr>
                         <tr>
                             <th scope="row"></th>

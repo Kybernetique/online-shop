@@ -24,7 +24,7 @@ class OrderService
         foreach ($products as $product) {
             $order->products()->attach($product, [
                 'quantity' => $product->pivot->quantity,
-                'total_price' => $product->pivot->price
+                'price' => $product->pivot->price
             ]);
         }
     }

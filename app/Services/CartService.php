@@ -24,10 +24,6 @@ class CartService
 
         $product = $this->productRepository->find($data['product_id']);
         if ($cart->products()->find($product->id)) {
-//            $cart->products()->sync([$product->id => [
-//                'price' => $data['price'],
-//                'quantity' => $data['quantity']
-//            ]]);
             $cart->products()->syncWithoutDetaching([$product->id => [
                 'price' => DB::raw('price + ' . $data['price']),
                 'quantity' => DB::raw('quantity + ' . $data['quantity'])
