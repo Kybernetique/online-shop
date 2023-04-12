@@ -3,11 +3,10 @@
     <div class="text-center mt-5">
         <h1>Ваш заказ оформлен!</h1> <br>
         <p>Благодарим за заказ!</p>
-        <p>Номер Вашего заказа: №{{$order->id}}</p>
-        <p>Заказ будет доставлен в город: {{$order->city}}</p>
-        <p>по адресу: {{$order->shipping_address}}</p>
+        <p>Номер Вашего заказа: №{{$order->id}}.</p>
+        <p>Заказ будет доставлен по адресу: {{$order->shipping_address}}.</p>
         <p>Детали заказа будут отправлены
-            на Вашу электронную почту {{$order->email}}</p></div>
+            на Вашу электронную почту: {{$order->email}}.</p></div>
     <section>
         <div class="cart-box-main">
             <div class="container mt-5">

@@ -24,7 +24,7 @@
             <div class="col-md-2 mb-3">
                 <label for="validationCustomPhoneNumber">Номер телефона</label>
                 <input type="text" name="phone_number" class="form-control" id="validationCustomPhoneNumber"
-                       placeholder="89997896959" value="89997896959" required>
+                       placeholder="89997896959" value="{{$user->phone_number}}" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите номер телефона.
                 </div>
