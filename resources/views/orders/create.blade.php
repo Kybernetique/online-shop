@@ -14,7 +14,7 @@
             <div class="col-md-2 mb-3">
                 <label for="validationTooltip01">Имя</label>
                 <input type="text" name="name" class="form-control" id="validationTooltip01" value="{{$user->name}}"
-                       placeholder="Имя" required>
+                       placeholder="Иван" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите Ваше имя.
                 </div>
@@ -24,7 +24,7 @@
             <div class="col-md-2 mb-3">
                 <label for="validationCustom05">Номер телефона</label>
                 <input type="text" name="phone_number" class="form-control" id="validationCustom05"
-                       placeholder="Номер телефона" required>
+                       placeholder="89997896858" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите номер телефона.
                 </div>
@@ -40,7 +40,7 @@
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
                     </div>
                     <input type="text" name="email" class="form-control" id="validationCustomUsername"
-                           placeholder="Электронная почта" value="{{$user->email}}"
+                           placeholder="ivanov89@gmail.com" value="{{$user->email}}"
                            aria-describedby="inputGroupPrepend" required>
 
                     <div class="invalid-feedback">
@@ -81,8 +81,8 @@
         {{-- Comment --}}
         <div class="row justify-content-center">
             <div class="col-md-4 mb-3">
-                <label for="textarea0">Комментарий к заказу</label>
-                <textarea class="form-control" id="textarea0" rows="3"></textarea>
+                <label>Комментарий к заказу <p class="small text-muted">(необязательно)</p></label>
+                <textarea class="form-control" name="comment" rows="3"></textarea>
             </div>
         </div>
 

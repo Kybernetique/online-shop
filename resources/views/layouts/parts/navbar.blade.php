@@ -1,20 +1,3 @@
-<style>
-    .navbar-nav .dropdown-menu .dropdown-item:hover,
-    .navbar-nav .dropdown-menu .dropdown-item:active {
-        color: #212529;
-        background-color: #ffc107;
-    }
-
-    .navbar-nav .dropdown-menu .dropdown-item:focus {
-        color: #424649;
-        background-color: #ffca2c;
-    }
-
-    li > a:hover {
-        background-color: #424649;
-    }
-</style>
-
 <header>
     <div class="px-3 py-2 text-bg-dark">
         <div class="container">
@@ -107,3 +90,20 @@
         </div>
     @endguest
 </header>
+
+<style>
+    .navbar-nav .dropdown-menu .dropdown-item:hover,
+    .navbar-nav .dropdown-menu .dropdown-item:active {
+        color: #212529;
+        background-color: #ffc107;
+    }
+
+    .navbar-nav .dropdown-menu .dropdown-item:focus {
+        color: #424649;
+        background-color: #ffca2c;
+    }
+
+    li > a:hover {
+        background-color: #424649;
+    }
+</style>

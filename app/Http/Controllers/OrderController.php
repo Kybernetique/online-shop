@@ -59,8 +59,8 @@ class OrderController extends Controller
             ]
         );
         $order = $this->orderService->create($data);
-        $this->orderService->store($order, $products);
-        $this->cartService->detach($cart);
+        $this->orderService->attachProducts($order, $products);
+        $cart->products()->detach(); // clear items from cart
         return view('orders.show', compact('order'));
     }
 }

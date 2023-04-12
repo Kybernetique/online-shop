@@ -19,7 +19,7 @@ class OrderService
         return $this->orderRepository->create($data);
     }
 
-    public function store(Order $order, $products): void
+    public function attachProducts(Order $order, $products): void
     {
         foreach ($products as $product) {
             $order->products()->attach($product, [

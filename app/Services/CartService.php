@@ -63,10 +63,4 @@ class CartService
         }
         $cart->total_price = $updatedPrice;
     }
-
-    public function detach(Cart $cart): void
-    {
-        $cart->products()->detach();
-
-    }
 }
