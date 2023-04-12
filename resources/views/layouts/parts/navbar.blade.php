@@ -5,6 +5,11 @@
         background-color: #ffc107;
     }
 
+    .navbar-nav .dropdown-menu .dropdown-item:focus {
+        color: #424649;
+        background-color: #ffca2c;
+    }
+
     li > a:hover {
         background-color: #424649;
     }
