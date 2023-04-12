@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::where('id', $id)->first();
-        $products = Product::where('category_id', $category->id)->get();
+        $products = Product::where('category_id', $category->id)->paginate(9);
         return view('products.index', compact('category'), compact('products'));
     }
 }
