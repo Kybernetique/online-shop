@@ -60,5 +60,10 @@
                 @endforeach
             </div>
         </main>
+        <div class="row row-cols-3">
+            <div class="col"></div>
+            <div class="col">{{ $products->links() }}</div>
+            <div class="col"></div>
+        </div>
     </div>
 @endsection
