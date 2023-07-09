@@ -1,77 +1,57 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Онлайн магазин
+**Регистрация.**
+Страница регистрации появляется тогда, когда пользователь захотел зарегистрироваться. 
+Пользователю требуется ввести адрес электронной почты, имя пользователя, номер телефона, а также пароль. 
+В случае успешной регистрации пользователь будет перенаправлен на страницу авторизации, иначе появится уведомление об ошибке.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![image](https://github.com/a-shdv/online-shop/assets/54847558/08e9cedc-ec97-4502-af9c-680c8ba3b893)
 
-## About Laravel
+**Авторизация.**
+Страница авторизации появляется после того, как пользователь сам решил авторизоваться, был перенаправлен со страницы регистрации или попытался воспользоваться функциональностью,
+доступной только авторизованному пользователю, например, пользователь попытался добавить товар в корзину, будучи неавторизованным. 
+Пользователю требуется ввести логин и пароль. 
+Если пользователь с таким логином и паролем существует в БД, то пользователь при попытке войти, будет перенаправлен на главную страницу, иначе будет выведено уведомление об ошибке.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and
-creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in
-many web projects, such as:
+![image](https://github.com/a-shdv/online-shop/assets/54847558/71575c94-f05d-4f40-825d-5fbf5f17d1c9)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache)
-  storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Главная страница.**
+Главная страница онлайн магазина, на которой размещены товары. 
+Страницу могут посмотреть неавторизованные пользователи. 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![image](https://github.com/a-shdv/online-shop/assets/54847558/4a69c5ba-8f72-41a2-a9a0-84ee8430322e)
 
-## Learning Laravel
+**Категории товаров.**
+Пользователь может просмотреть существующие категории товаров. При попытке перейти на какую-либо из категорий будут выведены все товары, принадлежащие категории, по которой перешёл пользователь.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all
-modern web application frameworks, making it a breeze to get started with the framework.
+![image](https://github.com/a-shdv/online-shop/assets/54847558/61657b5e-e7d3-4bdc-9fdf-9b4b093e484a)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a
-modern Laravel application from scratch.
+**Страница товара.**
+Пользователь может просмотреть расширенное описание товара, а также добавить товар, находясь на этой странице.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video
-tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging
-into our comprehensive video library.
+![image](https://github.com/a-shdv/online-shop/assets/54847558/c35f6e5f-0971-425a-a23f-32d170da6e99)
 
-## Laravel Sponsors
+![image](https://github.com/a-shdv/online-shop/assets/54847558/60519a8e-0549-4c29-a3bb-9591704a4f92)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in
-becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+**Управление содержимым корзины.**
+Пользователь может управлять содержимым корзины: менять количество добавленного товара в корзине, удалить его из корзины при необходимости. С этой страницы пользователь может оформить заказ.
 
-### Premium Partners
+![image](https://github.com/a-shdv/online-shop/assets/54847558/61066b82-5526-4f4c-9381-03f230109678)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+**Оформление и оплата заказа.**
+Пользователь может оформить заказ. Для этого ему нужно заполнить свои личные данные, адрес доставки, указать комментарий при необходимости. В случае, если какое-либо поле не заполнено, то будет выдана ошибка.
 
-## Contributing
+![image](https://github.com/a-shdv/online-shop/assets/54847558/69377959-d8b0-4818-86fd-06ced4f03143)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in
-the [Laravel documentation](https://laravel.com/docs/contributions).
+**Оформленный заказ.**
+В случае успешного оформления заказа пользователь получит соответствующее уведомление.
 
-## Code of Conduct
+![image](https://github.com/a-shdv/online-shop/assets/54847558/1a2afac4-c28c-4c33-ae0c-dbb21d2e9adb)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by
-the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Мои заказы.**
+Все заказы, которые когда-либо оформил пользователь, можно посмотреть на соответствующей странице «Мои заказы». На этой странице пользователь также может сформировать отчёт.
 
-## Security Vulnerabilities
+![image](https://github.com/a-shdv/online-shop/assets/54847558/1caf80c0-f2aa-4fae-b1cd-e21d586f9b9d)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell
-via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
